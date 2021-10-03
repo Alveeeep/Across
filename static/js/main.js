@@ -1,9 +1,10 @@
 /* Open the sidenav */
+var opened = false;
 function openNav() {
-  document.getElementById("Sidenav").style.width = "100%";
-}
-
-/* Close/hide the sidenav */
-function closeNav() {
-  document.getElementById("Sidenav").style.width = "0";
+    if (opened == false){
+        document.getElementById("Sidenav").style.width = "100%";
+        opened = true;}
+    else{
+        document.getElementById("Sidenav").style.width = "0";
+        opened = false;}
 }
