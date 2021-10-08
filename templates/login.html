@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Войти</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+<body>
+<main>
+    <div class="logo" style="height: 320px; width: 100%">
+        <div class="d-flex justify-content-center" style="position: relative;top:98px">
+            <div class="flex-column">
+                <a href="/" alt="..." style="position:relative; left:26px">
+                    <img src="/static/images/logo_1.png" alt="...">
+                </a>
+                <p style="position: relative;top:5px;font-family: Montserrat;font-style: normal;font-weight: bold;
+                font-size: 30px;line-height: 37px;text-align: center;color: #000000;">
+                    ACROSS</p>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="padding:0;height:492px; background: #F8F8F8; border-radius: 22px;">
+        <div class="d-flex justify-content-center" style="position: relative;top:25px">
+            <div class="flex-column">
+                <div class="d-flex flex-row">
+                    <button class="log-button" id="log" type="button">Войти</button>
+                    <button class="log-button" id="register" type="button" onfocus="changeBtnLogin">Регистрация</button>
+                </div>
+                <div class="flex-column" style="position: relative;top:15px">
+                    <input class="form-control" type="email" id="floatingInput" placeholder="E-mail">
+                    <input class="form-control" type="password" id="floatingPassword" placeholder="Пароль">
+                </div>
+                <div class="d-flex justify-content-center" style="position: relative;top:128px;height:60px">
+                    <button class="btn-sub" type="submit">Войти</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="/static/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+</body>
+</html>

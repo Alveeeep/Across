@@ -8,3 +8,6 @@ function openNav() {
         document.getElementById("Sidenav").style.width = "0";
         opened = false;}
 }
+function changeBtnLogin() {
+    document.getElementById("log").classList.toggle('log-button');
+}

@@ -1,12 +1,46 @@
 from flask import Flask, render_template
+import unicodedata
+
+from flask_wtf import CsrfProtect, CSRFProtect
+from werkzeug.utils import redirect
+
+from data import db_session
+from flask import Flask, render_template
+from forms.search import SearchForm
+from forms.login import LoginForm, RegisterForm
+from data.users import User
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+import json
+import math
 
 app = Flask(__name__)
+CSRFProtect(app)
 app.config['SECRET_KEY'] = 'across_secret_key'
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    db_sess = db_session.create_session()
+    return db_sess.query(User).get(user_id)
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect("/")
 
 
 @app.route('/')
 def main_page():
     return render_template('main_page.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    return render_template('login.html')
 
 
 @app.route('/categories')
@@ -35,6 +69,7 @@ def custom_page():
 
 
 def main():
+    db_session.global_init("db/database.db")
     app.run()
 
 
