@@ -70,16 +70,17 @@
     var x = document.getElementById("login");
     var y = document.getElementById("signup");
     var z = document.getElementById("btn");
+    var rect = document.getElementById("btn").getBoundingClientRect();
 
     function register(){
-        x.style.top = "-870px";
+        x.style.top = "870px";
         y.style.top = "-130px";
-        z.style.left = "187px";
+        z.style.left = rect.left + 151 + "px";
     }
     function login(){
         x.style.top = "30px";
         y.style.top = "300px";
-        z.style.left = "37px";
+        z.style.left = rect.left + "px";
     }
 </script>
 </body>
