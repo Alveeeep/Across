@@ -45,9 +45,16 @@
                 </form>
                 <form id="signup" class="group">
                     <div class="flex-column">
-                        <input class="form-control" type="text"  placeholder="Имя">
-                        <input class="form-control" type="email"  placeholder="E-mail">
-                        <input class="form-control" type="password"  placeholder="Пароль">
+                        <img class="signup-back" src="/static/images/arrow2.png" alt="...">
+                        <p>Регистрация</p>
+                        <input class="form-control" type="text" placeholder="Имя">
+                        <input class="form-control" type="email" placeholder="E-mail">
+                        <input class="form-control" type="password" placeholder="Пароль">
+                        <input class="form-control" type="number" placeholder="Телефон">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
                         <div class="d-flex justify-content-center" style="position: relative;top:128px;height:60px">
                             <button class="submit-btn" type="submit">Регистрация</button>
                         </div>
@@ -82,6 +89,7 @@
         y.style.top = "300px";
         z.style.left = rect.left + "px";
     }
+
 </script>
 </body>
 </html>
