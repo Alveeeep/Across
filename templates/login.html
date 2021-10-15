@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    <div class="form-box">
+    <div class="form-box" id="form-box">
         <div class="d-flex justify-content-center">
             <div class="flex-column">
                 <div class="d-flex justify-content-center">
@@ -46,11 +46,14 @@
                 <form id="signup" class="group">
                     <div class="flex-column">
                         <img class="signup-back" src="/static/images/arrow2.png" alt="...">
-                        <p>Регистрация</p>
+                        <p style="font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 25px;line-height: 30px;color: #000000;">
+                            Регистрация</p>
                         <input class="form-control" type="text" placeholder="Имя">
                         <input class="form-control" type="email" placeholder="E-mail">
                         <input class="form-control" type="password" placeholder="Пароль">
-                        <input class="form-control" type="number" placeholder="Телефон">
+                        <input class="form-control" type="phone" placeholder="Телефон">
+                        <label class="form-check-label">Получать уведомления на номер телефона<br>о состоянии вашего
+                            товара</label>
                         <label class="switch">
                             <input type="checkbox">
                             <span class="slider round"></span>
@@ -77,18 +80,25 @@
     var x = document.getElementById("login");
     var y = document.getElementById("signup");
     var z = document.getElementById("btn");
+    var form = document.getElementById("form-box");
     var rect = document.getElementById("btn").getBoundingClientRect();
 
     function register(){
+        form.style.height = "770px";
+        form.style.top = "-278px";
         x.style.top = "870px";
         y.style.top = "-130px";
         z.style.left = rect.left + 151 + "px";
+
     }
     function login(){
+        form.style.height = "492px";
+        form.style.top = "0";
         x.style.top = "30px";
         y.style.top = "300px";
         z.style.left = rect.left + "px";
     }
+
 
 </script>
 </body>

@@ -552,6 +552,7 @@ box-shadow:none
     border-radius: 22px;
     background: #F8F8F8;
     overflow: hidden;
+    transition: .5s;
 }
 .toggle-btn{
     font-family: Montserrat;
@@ -673,4 +674,13 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.form-check-label{
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 12px;
+    color: #9B9B9B;
 }
