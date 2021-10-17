@@ -5,7 +5,7 @@ from flask_wtf import CsrfProtect, CSRFProtect
 from werkzeug.utils import redirect
 
 from data import db_session
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from forms.search import SearchForm
 from forms.login import LoginForm, RegisterForm
 from data.users import User
@@ -40,8 +40,14 @@ def main_page():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
-
+    form_login = LoginForm()
+    form_signup = RegisterForm()
+    if request.method == 'POST':
+        form_name = request.form['form-name']
+        if form_name == 'login':
+            return render_template('login.html', form=form_login)
+        elif form_name == 'signup':
+            return render_template('login.html', form=form_signup)
 
 @app.route('/categories')
 def categories_page():
