@@ -12,7 +12,7 @@
 </head>
 <body>
 <main>
-    <div class="logo" style="height: 320px; width: 100%">
+    <div class="logo" style="height: 320px; width: 100%" id="logo">
         <div class="d-flex justify-content-center" style="position: relative;top:98px">
             <div class="flex-column">
                 <a href="/" alt="..." style="position:relative; left:26px">
@@ -45,20 +45,21 @@
                 </form>
                 <form id="signup" class="group">
                     <div class="flex-column">
-                        <img class="signup-back" src="/static/images/arrow2.png" alt="...">
                         <p style="font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 25px;line-height: 30px;color: #000000;">
                             Регистрация</p>
-                        <input class="form-control" type="text" placeholder="Имя">
-                        <input class="form-control" type="email" placeholder="E-mail">
-                        <input class="form-control" type="password" placeholder="Пароль">
-                        <input class="form-control" type="phone" placeholder="Телефон">
-                        <label class="form-check-label">Получать уведомления на номер телефона<br>о состоянии вашего
-                            товара</label>
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider round"></span>
-                        </label>
-                        <div class="d-flex justify-content-center" style="position: relative;top:128px;height:60px">
+                        <input class="form-control" type="text" placeholder="Имя" style="position: relative;top:20px;">
+                        <input class="form-control" type="email" placeholder="E-mail" style="position: relative;top:20px;">
+                        <input class="form-control" type="password" placeholder="Пароль" style="position: relative;top:20px;">
+                        <input class="form-control" type="phone" placeholder="Телефон" style="position: relative;top:120px;">
+                        <div class="d-flex justify-content-between" style="position: relative;top:160px;">
+                            <label class="form-check-label" style="position: relative;left:5px;">Получать уведомления на номер телефона<br>о состоянии вашего
+                                товара</label>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="d-flex justify-content-center" style="position: relative;top:262px;height:60px">
                             <button class="submit-btn" type="submit">Регистрация</button>
                         </div>
                     </div>
@@ -82,22 +83,25 @@
     var z = document.getElementById("btn");
     var form = document.getElementById("form-box");
     var rect = document.getElementById("btn").getBoundingClientRect();
+    var logo = document.getElementById("logo");
 
     function register(){
+        logo.style.height = "42px";
         form.style.height = "770px";
-        form.style.top = "-278px";
         x.style.top = "870px";
         y.style.top = "-130px";
         z.style.left = rect.left + 151 + "px";
 
     }
     function login(){
+        logo.style.height = "320px";
         form.style.height = "492px";
         form.style.top = "0";
         x.style.top = "30px";
         y.style.top = "300px";
         z.style.left = rect.left + "px";
     }
+
 
 
 </script>

@@ -522,6 +522,9 @@ box-shadow:none
     top: 30px;
     transition: .5s;
 }
+.logo{
+    transition: .5s;
+}
 
 .form-control{
     font-family: Montserrat;
