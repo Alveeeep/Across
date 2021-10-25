@@ -42,12 +42,36 @@ def main_page():
 def login():
     form_login = LoginForm()
     form_signup = RegisterForm()
-    if request.method == 'POST':
-        form_name = request.form['form-name']
-        if form_name == 'login':
-            return render_template('login.html', form=form_login)
-        elif form_name == 'signup':
-            return render_template('login.html', form=form_signup)
+    if form_login.validate_on_submit():
+        db_sess = db_session.create_session()
+        user = db_sess.query(User).filter(User.email == form_login.email.data).first()
+        if user and user.check_password(form_login.password.data):
+            return redirect('/')
+        return render_template('login.html', signup_form=form_signup, login_form=form_login,
+                               message="Неправильный логин или пароль")
+    return render_template('login.html', signup_form=form_signup, login_form=form_login)
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form_login = LoginForm()
+    form_signup = RegisterForm()
+    if form_signup.validate_on_submit():
+        db_sess = db_session.create_session()
+        if db_sess.query(User).filter(User.email == form_signup.email.data).first():
+            return render_template('login.html', signup_form=form_signup, login_form=form_login,
+                                   message="Такой пользователь уже есть")
+        user = User(
+            name=form_signup.name.data,
+            email=form_signup.email.data,
+            phone=form_signup.phone.data
+        )
+        user.set_password(form_signup.password.data)
+        db_sess.add(user)
+        db_sess.commit()
+        return redirect('/login')
+    return render_template('login.html', signup_form=form_signup, login_form=form_login)
+
 
 @app.route('/categories')
 def categories_page():

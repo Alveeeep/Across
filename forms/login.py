@@ -15,4 +15,4 @@ class RegisterForm(FlaskForm):
     email = EmailField('E-mail', validators=[DataRequired()])
     password = PasswordField('Пароль', validators=[DataRequired()])
     phone = StringField('Номер', validators=[DataRequired()])
-    submit = SubmitField('Войти')
+    submit = SubmitField('Регистрация')

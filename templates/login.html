@@ -34,33 +34,35 @@
                         <button class="toggle-btn" id="register" type="button" onclick="register()">РЕГИСТРАЦИЯ</button>
                     </div>
                 </div>
-                <form id="login" class="group" name="form-name" value="login">
+                <form id="login" class="group" value="login" action="{{ url_for('login') }}" method="post">
+                    {{ login_form.hidden_tag() }}
                     <div class="flex-column">
-                        <input class="form-control" type="email" id="floatingInput" placeholder="E-mail">
-                        <input class="form-control" type="password" id="floatingPassword" placeholder="Пароль">
+                        {{ login_form.email(class="form-control", type="email", id="floatingInput",
+                        placeholder="E-mail") }}
+                        {{ login_form.password(class="form-control", type="password", id="floatingPassword",
+                        placeholder="Пароль") }}
+                        <div>{{ message }}</div>
                         <div class="d-flex justify-content-center" style="position: relative;top:128px;height:60px">
-                            <button class="submit-btn" type="submit">Войти</button>
+                            {{ login_form.submit(type="submit", class="submit-btn") }}
                         </div>
                     </div>
                 </form>
-                <form id="signup" class="group" name="form-name" value="signup">
+                <form id="signup" class="group" value="signup" action="{{ url_for('register') }}" method="post">
+                    {{ signup_form.hidden_tag() }}
                     <div class="flex-column">
                         <p style="font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 25px;line-height: 30px;color: #000000;">
                             Регистрация</p>
-                        <input class="form-control" type="name" placeholder="Имя" style="position: relative;top:20px;">
-                        <input class="form-control" type="email" placeholder="E-mail" style="position: relative;top:20px;">
-                        <input class="form-control" type="password" placeholder="Пароль" style="position: relative;top:20px;">
-                        <input class="form-control" type="phone" placeholder="Телефон" style="position: relative;top:120px;">
-                        <div class="d-flex justify-content-between" style="position: relative;top:160px;">
-                            <label class="form-check-label" style="position: relative;left:5px;">Получать уведомления на номер телефона<br>о состоянии вашего
-                                товара</label>
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
+                        {{ signup_form.name(class="form-control", id="floatingName",type="name", placeholder="Имя",
+                        style="position: relative;top:20px;") }}
+                        {{ signup_form.email(class="form-control", id="floatingEmail",type="email", placeholder="E-mail",
+                        style="position: relative;top:20px;") }}
+                        {{ signup_form.password(class="form-control", id="floatingPassword",type="password", placeholder="Пароль",
+                        style="position: relative;top:20px;") }}
+                        {{ signup_form.phone(class="form-control", id="floatingPhone",type="phone", placeholder="Телефон",
+                        style="position: relative;top:120px;") }}
+                        <div style="position: relative;top:120px;">{{ message }}</div>
                         <div class="d-flex justify-content-center" style="position: relative;top:262px;height:60px">
-                            <button class="submit-btn" type="submit">Регистрация</button>
+                            {{ signup_form.submit(type="submit", class="submit-btn") }}
                         </div>
                     </div>
                 </form>
@@ -101,6 +103,7 @@
         y.style.top = "300px";
         z.style.left = rect.left + "px";
     }
+
 
 
 
