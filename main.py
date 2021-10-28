@@ -46,6 +46,7 @@ def login():
         db_sess = db_session.create_session()
         user = db_sess.query(User).filter(User.email == form_login.email.data).first()
         if user and user.check_password(form_login.password.data):
+            login_user(user)
             return redirect('/')
         return render_template('login.html', signup_form=form_signup, login_form=form_login,
                                message="Неправильный логин или пароль")
