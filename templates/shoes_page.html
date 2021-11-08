@@ -3,11 +3,44 @@
 <main>
     <div class="d-flex flex-column">
         <div class="container">
-            <div class="special_for_you" style="position: relative;left: 9px;top: -25px;font-family: Montserrat;
+            <div class="special_for_you" style="position: relative;left: 9px;top: 0px;font-family: Montserrat;
         font-style: normal;font-weight: bold;font-size: 25px;line-height: 30px;color: #000000;">
-                Обувь
+                {{ title }}
             </div>
         </div>
+    </div>
+    <div class="d-flex flex-column" style="position: relative;top: 20px">
+        {% for i in range(length) %}
+        <div class="container" style="background-color: #F7F7F7; margin-bottom: 5px">
+            <div class="d-flex justify-content-between"
+                 style="position: relative;height:169px; width: 100%; margin: 0 auto;">
+                <div class="container">
+                    <a class="container" style="text-decoration: none;" href="/items/{{ items[i].id }}">
+                        <div class="item-title"
+                             style="
+                                 font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 20px;line-height: 24px;color: #000000;">
+                            {{ items[i].title }}
+                        </div>
+                        <div class="item-name"
+                             style="
+                                 font-family: Montserrat;font-style: italic;font-weight: 400;font-size: 20px;line-height: 24px;color: #000000;">
+                            {{ items[i].name }}
+                        </div>
+                        <div class="item-price" style="position: relative;top:40px;
+                            font-family: Montserrat;font-style: normal;font-weight: 300;font-size: 16px;line-height: 20px;color: #000000;">
+                            {{ items[i].price }}₽
+                        </div>
+                    </a>
+                </div>
+                <div class="flex-grow-1 bd-highlight">
+                    <a class="item-fluid" href="/items/{{ items[i].id }}"
+                         style="position: relative;top:-10px;width: 90%; height:auto;left:15px">
+                        <img class="img-fluid" src="/static/images/{{ items[i].show_img }}" alt="...">
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </main>
 {% endblock %}

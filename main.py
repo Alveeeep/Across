@@ -9,6 +9,7 @@ from flask import Flask, render_template, request
 from forms.search import SearchForm
 from forms.login import LoginForm, RegisterForm
 from data.users import User
+from data.items import Item
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 import json
 import math
@@ -74,7 +75,7 @@ def register():
     return render_template('login.html', signup_form=form_signup, login_form=form_login)
 
 
-@app.route('/categories')
+@app.route('/categories')  # корзина переименовать потом
 def categories_page():
     return render_template('categories_page.html')
 
@@ -84,19 +85,22 @@ def new_page():
     return render_template('new_page.html')
 
 
-@app.route('/categories/shoes')
-def shoes_page():
-    return render_template('shoes_page.html')
+@app.route('/categories/<title>', methods=['GET', 'POST'])
+def shoes_page(title):
+    db_sess = db_session.create_session()
+    items = db_sess.query(Item).filter(Item.category == title).all()
+    with open("static/json/categories.json", "rt", encoding="utf8") as f:
+        c_list = json.loads(f.read())
+    c = c_list[title]
+    return render_template('shoes_page.html', items=items, length=len(items), title=c)
 
 
-@app.route('/categories/clothes')
-def clothes_page():
-    return render_template('clothes_page.html')
-
-
-@app.route('/categories/custom')
-def custom_page():
-    return render_template('custom_page.html')
+@app.route('/items/<item_id>', methods=['GET', 'POST'])
+def item_page(item_id):
+    db_sess = db_session.create_session()
+    item = db_sess.query(Item).filter(Item.id == item_id).first()
+    images = item.image.split(', ')
+    return render_template('item_page.html', title=item.title, images=images, item=item, len=len(images))
 
 
 def main():
