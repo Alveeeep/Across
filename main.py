@@ -100,7 +100,8 @@ def item_page(item_id):
     db_sess = db_session.create_session()
     item = db_sess.query(Item).filter(Item.id == item_id).first()
     images = item.image.split(', ')
-    return render_template('item_page.html', title=item.title, images=images, item=item, len=len(images))
+    sizes = item.size.split(', ')
+    return render_template('item_page.html', title=item.title, images=images, item=item, len=len(images), sizes=sizes)
 
 
 def main():
