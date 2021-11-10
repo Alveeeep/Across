@@ -68,10 +68,15 @@
                 </div>
             </div>
         </div>
-        <div class="sizes">
-            {% for el in sizes %}
-            <button type="checkbox" class="btn-sizes">{{ el }}</button>
-            {% endfor %}
+        <div class="d-flex justify-content-center">
+            <div class="sizes">
+                <div id="chosen-btn"><span id="chosen-text">36</span></div>
+                {% for el in sizes %}
+                <button type="checkbox" id="{{ el }}" class="btn-sizes" onclick="chosen({{ el }}, {{ sizes[0] }})">{{ el
+                    }}
+                </button>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </main>
@@ -79,5 +84,16 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
         crossorigin="anonymous"></script>
+<script>
+    var x = document.getElementById("chosen-btn");
+    var z = document.getElementById("chosen-text");
+    function chosen(size, min){
+        var size = size;
+        var min = document.getElementById(min).getBoundingClientRect().left;
+        z.textContent = size;
+        x.style.left = document.getElementById(size).getBoundingClientRect().left - min + "px";
+    }
+
+</script>
 </body>
 </html>
