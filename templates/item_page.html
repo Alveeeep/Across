@@ -68,6 +68,7 @@
                 </div>
             </div>
         </div>
+        <p class="size-text">Размер</p>
         <div class="d-flex justify-content-center">
             <div class="sizes">
                 <div id="chosen-btn"><span id="chosen-text">36</span></div>
@@ -78,6 +79,31 @@
                 {% endfor %}
             </div>
         </div>
+        <div class="accordion accordion-flush" id="accordionFlushExample" style="position:relative;top:150px">
+            <div class="accordion-item" style="background: transparent;">
+                <h2 class="accordion-header" id="flush-headingOne">
+                    <p class="accordion-button-1 collapsed" data-bs-toggle="collapse"
+                       data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne"
+                       style="font-family: Montserrat;font-style: normal;font-weight: 500;font-size: 16px;line-height: 20px;color: #000000;">
+                        Описание товара
+                    </p>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                     data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body"
+                         style="background: #F8F8F8;border-radius: 22px;font-family: Montserrat;font-style: normal;font-weight: 300;font-size: 16px;line-height: 20px;text-align: center;color: #000000;">
+                        {{ item.description }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form action="" method="post" class="d-flex justify-content-center" style="position: relative;top:170px">
+            {{ form.hidden_tag() }}
+            <div class="flex-column">
+                {{ form.submit(type="submit", class="submit-btn", style="margin-top:20px;") }}
+                <div style="width:100%;height:30px"></div>
+            </div>
+        </form>
     </div>
 </main>
 <script src="/static/js/main.js"></script>
@@ -93,6 +119,11 @@
         z.textContent = size;
         x.style.left = document.getElementById(size).getBoundingClientRect().left - min + "px";
     }
+
+
+
+
+
 
 </script>
 </body>

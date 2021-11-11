@@ -719,7 +719,7 @@ input:checked + .slider:before {
 }
 .sizes{
     position: relative;
-    top:80px;
+    top:105px;
     overflow-x: auto;
     height:60px;
     white-space: nowrap;
@@ -748,3 +748,57 @@ input:checked + .slider:before {
     color: #FFFFFF;
     border: 0;
 }
+.size-text{
+    position: relative;
+    top: 90px;
+    left:25px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    align-items: flex-end;
+    color: #000000;
+}
+.accordion-button-1{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
+    border: 0;
+    border-radius: 0;
+    overflow-anchor: none;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,border-radius .15s ease;
+}
+.accordion-button-1:not(.collapsed)::after {
+background-image: url("/static/images/Arrow3.png");
+margin-right: 170px;
+margin-top: 3px;
+transform: rotate(-180deg);
+}
+
+.accordion-button-1.collapsed {
+background-image: url("/static/images/Arrow3.png");
+  background: white
+}
+
+.accordion-button-1.collapsed::after{
+  background-image: url("/static/images/Arrow3.png");
+margin-top: 3px;
+margin-right: 170px;
+}
+.accordion-button-1::after {
+    flex-shrink: 0;
+    width: 8px;
+    height: 5px;
+    margin-left: auto;
+    content: "";
+    background-image: url("/static/images/Arrow3.png");
+    background-repeat: no-repeat;
+    transition: transform .2s ease-in-out;

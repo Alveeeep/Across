@@ -17,6 +17,7 @@ class Item(SqlAlchemyBase):
     show_img = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     color = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     size = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    description = sqlalchemy.Column(sqlalchemy.String, nullable=True)
 
     def __repr__(self):
         return "<Item> {}, price - {}, category - {}".format(self.title, self.price, self.category)

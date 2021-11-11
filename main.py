@@ -8,6 +8,7 @@ from data import db_session
 from flask import Flask, render_template, request
 from forms.search import SearchForm
 from forms.login import LoginForm, RegisterForm
+from forms.cart import Cart
 from data.users import User
 from data.items import Item
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
@@ -34,7 +35,7 @@ def logout():
     return redirect("/")
 
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def main_page():
     return render_template('main_page.html')
 
@@ -80,11 +81,6 @@ def categories_page():
     return render_template('categories_page.html')
 
 
-@app.route('/new')
-def new_page():
-    return render_template('new_page.html')
-
-
 @app.route('/categories/<title>', methods=['GET', 'POST'])
 def shoes_page(title):
     db_sess = db_session.create_session()
@@ -92,11 +88,12 @@ def shoes_page(title):
     with open("static/json/categories.json", "rt", encoding="utf8") as f:
         c_list = json.loads(f.read())
     c = c_list[title]
-    return render_template('shoes_page.html', items=items, length=len(items), title=c)
+    return render_template('shoes_page.html', items=items, length=len(items), title=с)
 
 
 @app.route('/items/<item_id>', methods=['GET', 'POST'])
 def item_page(item_id):
+    form = Cart()
     db_sess = db_session.create_session()
     item = db_sess.query(Item).filter(Item.id == item_id).first()
     images = item.image.split(', ')
