@@ -5,7 +5,7 @@ from flask_wtf import CsrfProtect, CSRFProtect
 from werkzeug.utils import redirect
 
 from data import db_session
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, make_response, jsonify
 from forms.search import SearchForm
 from forms.login import LoginForm, RegisterForm
 from forms.cart import Cart
@@ -88,7 +88,7 @@ def shoes_page(title):
     with open("static/json/categories.json", "rt", encoding="utf8") as f:
         c_list = json.loads(f.read())
     c = c_list[title]
-    return render_template('shoes_page.html', items=items, length=len(items), title=с)
+    return render_template('shoes_page.html', items=items, length=len(items), title=c)
 
 
 @app.route('/items/<item_id>', methods=['GET', 'POST'])
@@ -98,7 +98,20 @@ def item_page(item_id):
     item = db_sess.query(Item).filter(Item.id == item_id).first()
     images = item.image.split(', ')
     sizes = item.size.split(', ')
-    return render_template('item_page.html', title=item.title, images=images, item=item, len=len(images), sizes=sizes)
+    resp = make_response(
+        render_template('item_page.html', title=item.title, images=images, item=item, len=len(images), sizes=sizes,
+                        form=form))
+    if form.validate_on_submit():
+        cookie = request.cookies.get('usercart')
+        print(cookie)
+        if cookie is not None:
+            if '{}:{}'.format(item_id, form.size.data) not in cookie:
+                cookie += ',{}:{}'.format(item_id, form.size.data)
+                resp.set_cookie('usercart', cookie)
+        else:
+            resp.set_cookie('usercart', '{}:{}'.format(item_id, form.size.data))
+        return resp
+    return resp
 
 
 def main():

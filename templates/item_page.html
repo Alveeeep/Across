@@ -71,7 +71,7 @@
         <p class="size-text">Размер</p>
         <div class="d-flex justify-content-center">
             <div class="sizes">
-                <div id="chosen-btn"><span id="chosen-text">36</span></div>
+                <div id="chosen-btn"><span id="chosen-text">{{ sizes[0] }}</span></div>
                 {% for el in sizes %}
                 <button type="checkbox" id="{{ el }}" class="btn-sizes" onclick="chosen({{ el }}, {{ sizes[0] }})">{{ el
                     }}
@@ -99,8 +99,9 @@
         </div>
         <form action="" method="post" class="d-flex justify-content-center" style="position: relative;top:170px">
             {{ form.hidden_tag() }}
+            {{ form.size(id="submit-size", style="display:none") }}
             <div class="flex-column">
-                {{ form.submit(type="submit", class="submit-btn", style="margin-top:20px;") }}
+                {{ form.submit(type="submit", class="submit-btn", id="submit_btn", style="margin-top:20px;") }}
                 <div style="width:100%;height:30px"></div>
             </div>
         </form>
@@ -113,17 +114,14 @@
 <script>
     var x = document.getElementById("chosen-btn");
     var z = document.getElementById("chosen-text");
+    var y = document.getElementById("submit-size");
     function chosen(size, min){
         var size = size;
         var min = document.getElementById(min).getBoundingClientRect().left;
         z.textContent = size;
+        y.textContent = size;
         x.style.left = document.getElementById(size).getBoundingClientRect().left - min + "px";
     }
-
-
-
-
-
 
 </script>
 </body>
