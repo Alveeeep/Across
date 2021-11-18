@@ -8,6 +8,7 @@ from data import db_session
 from flask import Flask, render_template, request, make_response, jsonify
 from forms.search import SearchForm
 from forms.login import LoginForm, RegisterForm
+from forms.buy import BuyForm
 from forms.cart import Cart
 from data.users import User
 from data.items import Item
@@ -76,9 +77,28 @@ def register():
     return render_template('login.html', signup_form=form_signup, login_form=form_login)
 
 
-@app.route('/categories')  # корзина переименовать потом
+@app.route('/cart')  # корзина переименовать потом
 def categories_page():
-    return render_template('categories_page.html')
+    db_sess = db_session.create_session()
+    form = BuyForm()
+    cart = []
+    items = []
+    total = 0
+    if current_user.is_authenticated:
+        id = current_user.get_id()
+        user = db_sess.query(User).filter(User.id == id).first()
+        cart = user.cart
+        cart = cart.split(', ')
+    else:
+        cart = request.cookies.get('usercart')
+        cart = cart.split(',')
+    for el in cart:
+        el = el.split(':')
+        id = int(el[0])
+        item = db_sess.query(Item).filter(Item.id == id).first()
+        items.append(item)
+        total += int(item.price)
+    return render_template('cart_page.html', items=items, total=total, length=len(items), form=form)
 
 
 @app.route('/categories/<title>', methods=['GET', 'POST'])

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+<main>
+    <div class="d-flex flex-column">
+        <div class="container">
+            <div class="special_for_you" style="position: relative;left: 9px;top: 0px;font-family: Montserrat;
+        font-style: normal;font-weight: normal;font-size: 25px;line-height: 30px;color: #000000;">
+                Корзина
+            </div>
+        </div>
+    </div>
+    <div class="d-flex flex-column" style="position: relative;top: 20px">
+        {% for i in range(length) %}
+        <div class="container" style="background-color: #F7F7F7; margin-bottom: 5px">
+            <div class="d-flex justify-content-between"
+                 style="position: relative;height:169px; width: 100%; margin: 0 auto;">
+                <div class="container">
+                    <a class="container" style="text-decoration: none;" href="/items/{{ items[i].id }}">
+                        <div class="item-title"
+                             style="
+                                 font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 20px;line-height: 24px;color: #000000;">
+                            {{ items[i].title }}
+                        </div>
+                        <div class="item-name"
+                             style="
+                                 font-family: Montserrat;font-style: italic;font-weight: 400;font-size: 20px;line-height: 24px;color: #000000;">
+                            {{ items[i].name }}
+                        </div>
+                        <div class="item-price" style="position: relative;top:40px;
+                            font-family: Montserrat;font-style: normal;font-weight: 300;font-size: 16px;line-height: 20px;color: #000000;">
+                            {{ items[i].price }}₽
+                        </div>
+                    </a>
+                </div>
+                <div class="flex-grow-1 bd-highlight">
+                    <a class="item-fluid" href="/items/{{ items[i].id }}"
+                       style="position: relative;top:-10px;width: 80%; height:auto;left:15px">
+                        <img class="img-fluid" src="/static/images/{{ items[i].show_img }}" alt="...">
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="d-flex bd-highlight mb-3" style="position: relative;top:50px;margin-left:50px;margin-right:50px">
+            <div class="me-auto p-2 bd-highlight"
+                 style="font-family: Montserrat;font-style: normal;font-weight: 300;font-size: 24px;line-height: 29px;display: flex;align-items: center;color: #9B9B9B;">
+                Итого
+            </div>
+            <div class="p-2 bd-highlight"
+                 style="font-family: Montserrat;font-style: normal;font-weight: 300;font-size: 24px;line-height: 29px;display: flex;align-items: center;text-align: right;color: #000000;">
+                {{ total }}
+            </div>
+        </div>
+        <form action="" method="post" class="d-flex justify-content-center" style="position: relative;top:40px">
+            {{ form.hidden_tag() }}
+            <div class="flex-column">
+                {{ form.submit(type="submit", class="submit-btn", id="submit_btn", style="margin-top:20px;margin-bottom:40px;") }}
+                <div style="width:100%;height:30px"></div>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}
