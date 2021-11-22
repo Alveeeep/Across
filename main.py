@@ -94,15 +94,15 @@ def register():
     return render_template('login.html', signup_form=form_signup, login_form=form_login)
 
 
-@app.route('/cart')  # корзина переименовать потом
+@app.route('/cart', methods=['GET', 'POST'])  # корзина переименовать потом
 def categories_page():
     db_sess = db_session.create_session()
     form = BuyForm()
-    search_form = SearchForm()
     cart = []
     sizes = []
     items = []
     total = 0
+    search_form = SearchForm()
     if search_form.validate_on_submit():
         res = search_form.search.data
         return redirect('/search/{}'.format(res))
@@ -110,19 +110,21 @@ def categories_page():
         id = current_user.get_id()
         user = db_sess.query(User).filter(User.id == id).first()
         cart = user.cart
-        cart = cart.split(', ')
     else:
         cart = request.cookies.get('usercart')
-        cart = cart.split(',')
-    for el in cart:
-        el = el.split(':')
-        id = int(el[0])
-        sizes.append(int(el[1]))
-        item = db_sess.query(Item).filter(Item.id == id).first()
-        items.append(item)
-        total += int(item.price)
-    return render_template('cart_page.html', items=items, total=total, length=len(items), form=form,
-                           search_form=search_form, sizes=sizes)
+    if len(cart) != 0:
+        cart = cart.split(', ')
+        for el in cart:
+            el = el.split(':')
+            id = int(el[0])
+            sizes.append(int(el[1]))
+            item = db_sess.query(Item).filter(Item.id == id).first()
+            items.append(item)
+            total += int(item.price)
+        return render_template('cart_page.html', items=items, total=total, length=len(items), form=form,
+                               search_form=search_form, sizes=sizes)
+    else:
+        return render_template('cart_page.html', length=0, search_form=search_form)
 
 
 @app.route('/item_delete/<id>/<size>', methods=['GET', 'POST'])
