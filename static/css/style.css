@@ -747,6 +747,7 @@ input:checked + .slider:before {
     justify-content: center;
     color: #FFFFFF;
     border: 0;
+    visibility: hidden;
 }
 .size-text{
     position: relative;

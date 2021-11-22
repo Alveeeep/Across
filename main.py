@@ -177,26 +177,26 @@ def item_page(item_id):
         render_template('item_page.html', title=item.title, images=images, item=item, len=len(images), sizes=sizes,
                         form=form))
     if form.validate_on_submit():
-        cookie = request.cookies.get('usercart')
         size = form.size.data
-        print(cookie)
-        if cookie is not None:
-            if '{}:{}'.format(item_id, size) not in cookie:
-                cookie += ',{}:{}'.format(item_id, size)
-                resp.set_cookie('usercart', cookie)
-        else:
-            resp.set_cookie('usercart', '{}:{}'.format(item_id, size))
         if current_user.is_authenticated:
             id = current_user.get_id()
             user = db_sess.query(User).filter(User.id == id).first()
             cart = user.cart
-            if cart is not None:
+            if len(cart) != 0:
                 cart += ', {}:{}'.format(item_id, size)
                 user.cart = cart
                 db_sess.commit()
             else:
                 user.cart = '{}:{}'.format(item_id, size)
                 db_sess.commit()
+        else:
+            cookie = request.cookies.get('usercart')
+            if cookie is not None:
+                if '{}:{}'.format(item_id, size) not in cookie:
+                    cookie += ',{}:{}'.format(item_id, size)
+                    resp.set_cookie('usercart', cookie)
+            else:
+                resp.set_cookie('usercart', '{}:{}'.format(item_id, size))
         return resp
     return resp
 

@@ -120,6 +120,7 @@
         var min = document.getElementById(min).getBoundingClientRect().left;
         z.textContent = size;
         y.textContent = size;
+        x.style.visibility = "visible";
         x.style.left = document.getElementById(size).getBoundingClientRect().left - min + "px";
     }
 
