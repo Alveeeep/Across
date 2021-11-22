@@ -58,19 +58,20 @@
                 </li>
             </ul>
         </div>
-        <div class="p-2 bd-highlight">
+        <form class="p-2 bd-highlight" method="post" action="">
+            {{ search_form.hidden_tag() }}
             <ul class="nav nav-pills">
                 <div class="search-icon">
                     <img class="search-icon" src="/static/images/search-icon.png" alt="icon">
                 </div>
                 <div class="search-input">
-                    <input type="text" class="search">
+                    {{ search_form.search(type="text", class="search") }}
                 </div>
                 <div class="settings">
                     <img class="settings-icon" src="/static/images/settings-icon.png" alt="settings-icon">
                 </div>
             </ul>
-        </div>
+        </form>
     </div>
 </header>
 {% block content %}{% endblock %}

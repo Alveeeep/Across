@@ -38,7 +38,24 @@ def logout():
 
 @app.route('/', methods=['POST', 'GET'])
 def main_page():
-    return render_template('main_page.html')
+    search_form = SearchForm()
+    if search_form.validate_on_submit():
+        res = search_form.search.data
+        return redirect('/search/{}'.format(res))
+    return render_template('main_page.html', search_form=search_form)
+
+
+@app.route('/search/<title>', methods=['GET', 'POST'])
+def search(title):
+    search_form = SearchForm()
+    if search_form.validate_on_submit():
+        res = search_form.search.data
+        return redirect('/search/{}'.format(res))
+    db_sess = db_session.create_session()
+    items = db_sess.query(Item).filter(Item.title.like('%{}%'.format(title))).all()
+    if len(items) == 0:
+        items = db_sess.query(Item).filter(Item.name.like('%{}%'.format(title))).all()
+    return render_template('shoes_page.html', items=items, length=len(items), title=title, search_form=search_form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -81,9 +98,14 @@ def register():
 def categories_page():
     db_sess = db_session.create_session()
     form = BuyForm()
+    search_form = SearchForm()
     cart = []
+    sizes = []
     items = []
     total = 0
+    if search_form.validate_on_submit():
+        res = search_form.search.data
+        return redirect('/search/{}'.format(res))
     if current_user.is_authenticated:
         id = current_user.get_id()
         user = db_sess.query(User).filter(User.id == id).first()
@@ -95,20 +117,53 @@ def categories_page():
     for el in cart:
         el = el.split(':')
         id = int(el[0])
+        sizes.append(int(el[1]))
         item = db_sess.query(Item).filter(Item.id == id).first()
         items.append(item)
         total += int(item.price)
-    return render_template('cart_page.html', items=items, total=total, length=len(items), form=form)
+    return render_template('cart_page.html', items=items, total=total, length=len(items), form=form,
+                           search_form=search_form, sizes=sizes)
+
+
+@app.route('/item_delete/<id>/<size>', methods=['GET', 'POST'])
+def delete_item(id, size):
+    db_sess = db_session.create_session()
+    resp = make_response(redirect('/cart'))
+    item_id = id
+    if current_user.is_authenticated:
+        id = current_user.get_id()
+        user = db_sess.query(User).filter(User.id == id).first()
+        cart = user.cart
+        cart = cart.split(', ')
+        for el in cart:
+            if el == '{}:{}'.format(item_id, size):
+                cart.remove(el)
+        user.cart = ', '.join(cart)
+        db_sess.commit()
+        return resp
+    else:
+        cart = request.cookies.get('usercart')
+        cart = cart.split(',')
+        for el in cart:
+            if el == '{}:{}'.format(item_id, size):
+                cart.remove(el)
+        cart = ','.join(cart)
+        resp.set_cookie('usercart', cart)
+        return resp
 
 
 @app.route('/categories/<title>', methods=['GET', 'POST'])
 def shoes_page(title):
     db_sess = db_session.create_session()
     items = db_sess.query(Item).filter(Item.category == title).all()
+    search_form = SearchForm()
+    if search_form.validate_on_submit():
+        res = search_form.search.data
+        return redirect('/search/{}'.format(res))
     with open("static/json/categories.json", "rt", encoding="utf8") as f:
         c_list = json.loads(f.read())
     c = c_list[title]
-    return render_template('shoes_page.html', items=items, length=len(items), title=c)
+    return render_template('shoes_page.html', items=items, length=len(items), title=c, search_form=search_form)
 
 
 @app.route('/items/<item_id>', methods=['GET', 'POST'])

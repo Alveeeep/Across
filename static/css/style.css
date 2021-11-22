@@ -802,3 +802,12 @@ margin-right: 170px;
     background-image: url("/static/images/Arrow3.png");
     background-repeat: no-repeat;
     transition: transform .2s ease-in-out;
+
+
+.image-item {
+    max-width: 90%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
