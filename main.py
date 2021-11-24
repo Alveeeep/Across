@@ -12,6 +12,7 @@ from forms.buy import BuyForm
 from forms.cart import Cart
 from data.users import User
 from data.items import Item
+from data.news import New
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 import json
 import math
@@ -38,11 +39,17 @@ def logout():
 
 @app.route('/', methods=['POST', 'GET'])
 def main_page():
+    db_sess = db_session.create_session()
+    news = db_sess.query(New).all()
+    items = []
+    for el in news:
+        item = db_sess.query(Item).filter(Item.id == el.id).first()
+        items.append(item)
     search_form = SearchForm()
     if search_form.validate_on_submit():
         res = search_form.search.data
         return redirect('/search/{}'.format(res))
-    return render_template('main_page.html', search_form=search_form)
+    return render_template('main_page.html', search_form=search_form, news=items, length=len(items))
 
 
 @app.route('/search/<title>', methods=['GET', 'POST'])
@@ -201,15 +208,6 @@ def item_page(item_id):
                 resp.set_cookie('usercart', '{}:{}'.format(item_id, size))
         return resp
     return resp
-
-
-@app.route('/liked', methods=['GET', 'POST'])
-def liked_page():
-    search_form = SearchForm()
-    if search_form.validate_on_submit():
-        res = search_form.search.data
-        return redirect('/search/{}'.format(res))
-    return render_template('cart_page.html', length=0, search_form=search_form)
 
 
 def main():

@@ -206,73 +206,76 @@
                     </p>
                 </h2>
                 <div class="accordion accordion-flush" id="accordionFlushBetween2">
-                    <div class="accordion-body" style="background: #F7F7F7; height: 169px">
+                    <div class="accordion-body" style="background: #F7F7F7; height: 169px; padding: 0">
                         <div class="container">
                             <div class="d-flex justify-content-between"
-                                 style="position: relative;height:169px;top: 30px; width: 100%; margin: 0 auto;">
+                                 style="position: relative;height:169px; width: 100%; margin: 0 auto;">
                                 <div class="container">
-                                    <div class="item-title"
-                                         style="position: relative;left:-24px;top:19px;
-                             font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 25px;line-height: 30px;color: #000000;">
-                                        Обувь
-                                    </div>
+                                    <a class="container" style="text-decoration: none;" href="/items/{{ news[0].id }}">
+                                        <div class="item-title"
+                                             style="
+                                 font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 20px;line-height: 24px;color: #000000;">
+                                            {{ news[0].title }}
+                                        </div>
+                                        <div class="item-name"
+                                             style="
+                                 font-family: Montserrat;font-style: italic;font-weight: 400;font-size: 20px;line-height: 24px;color: #000000;">
+                                            {{ news[0].name }}
+                                        </div>
+                                        <div class="item-price" style="position: relative;top:40px;
+                            font-family: Montserrat;font-style: normal;font-weight: 300;font-size: 16px;line-height: 20px;color: #000000;">
+                                            {{ news[0].price }}₽
+                                        </div>
+                                    </a>
                                 </div>
                                 <div class="flex-grow-1 bd-highlight">
-                                    <div class="item-fluid"
-                                         style="position: relative;top:-60px;width: 90%; height:auto;left:30px">
-                                        <img class="img-fluid" src="static/images/v6_500.png" alt="...">
-                                    </div>
+                                    <a class="item-fluid" href="/items/{{ news[0].id }}"
+                                       style="position: relative;top:-10%;width: 80%; height:auto;left:10%">
+                                        <img src="/static/images/{{ news[0].show_img }}" alt="..."
+                                             style="max-width: 90%;height: auto;display: flex;align-items: center;justify-content: center">
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% for i in range(1, length) %}
                 <div id="flush2-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush2-headingOne"
                      data-bs-parent="#accordionFlushExample2" style="position: relative;top: 10px">
-                    <div class="accordion-body" style="background: #F7F7F7; height: 169px">
+                    <div class="accordion-body" style="background: #F7F7F7; height: 169px; padding:0">
                         <div class="container">
                             <div class="d-flex justify-content-between"
-                                 style="position: relative;height:169px;top: 30px; width: 100%; margin: 0 auto;">
+                                 style="position: relative;height:169px; width: 100%; margin: 0 auto;">
                                 <div class="container">
-                                    <div class="item-title"
-                                         style="position: relative;left:-24px;top:19px;
-                             font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 25px;line-height: 30px;color: #000000;">
-                                        Одежда
-                                    </div>
+                                    <a class="container" style="text-decoration: none;" href="/items/{{ news[i].id }}">
+                                        <div class="item-title"
+                                             style="
+                                 font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 20px;line-height: 24px;color: #000000;">
+                                            {{ news[i].title }}
+                                        </div>
+                                        <div class="item-name"
+                                             style="
+                                 font-family: Montserrat;font-style: italic;font-weight: 400;font-size: 20px;line-height: 24px;color: #000000;">
+                                            {{ news[i].name }}
+                                        </div>
+                                        <div class="item-price" style="position: relative;top:40px;
+                            font-family: Montserrat;font-style: normal;font-weight: 300;font-size: 16px;line-height: 20px;color: #000000;">
+                                            {{ news[i].price }}₽
+                                        </div>
+                                    </a>
                                 </div>
                                 <div class="flex-grow-1 bd-highlight">
-                                    <div class="item-fluid"
-                                         style="position: relative;top:-40px;width: 90%; height:auto;left:30px">
-                                        <img class="img-fluid" src="static/images/odezhda.png" alt="...">
-                                    </div>
+                                    <a class="item-fluid" href="/items/{{ news[i].id }}"
+                                       style="position: relative;top:-10%;width: 80%; height:auto;left:10%">
+                                        <img src="/static/images/{{ news[i].show_img }}" alt="..."
+                                             style="max-width: 90%;height: auto;display: flex;align-items: center;justify-content: center">
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div id="flush2-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush2-headingOne"
-                     data-bs-parent="#accordionFlushExample2" style="position: relative;top: 20px">
-                    <div class="accordion-body" style="background: #F7F7F7; height: 169px">
-                        <div class="container">
-                            <div class="d-flex justify-content-between"
-                                 style="position: relative;height:169px;top: 30px; width: 100%; margin: 0 auto;">
-                                <div class="container">
-                                    <div class="item-title"
-                                         style="position: relative;left:-24px;top:19px;
-                             font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 25px;line-height: 30px;color: #000000;">
-                                        Кастомные
-                                    </div>
-                                </div>
-                                <div class="flex-grow-1 bd-highlight">
-                                    <div class="item-fluid"
-                                         style="position: relative;top:0px;width: 100%; height:auto;left:30px">
-                                        <img class="img-fluid" src="static/images/v6_512.png" alt="...">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
