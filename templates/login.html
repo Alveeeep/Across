@@ -15,12 +15,16 @@
     <div class="logo" style="height: 320px; width: 100%" id="logo">
         <div class="d-flex justify-content-center" style="position: relative;top:98px">
             <div class="flex-column">
-                <a href="/" alt="..." style="position:relative; left:26px">
-                    <img src="/static/images/logo_1.png" alt="...">
-                </a>
-                <p style="position: relative;top:5px;font-family: Montserrat;font-style: normal;font-weight: bold;
+                <div class="d-flex justify-content-center">
+                    <a href="/" alt="...">
+                        <img src="/static/images/logo_1.png" alt="...">
+                    </a>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <p style="position: relative;top:5px;font-family: Montserrat;font-style: normal;font-weight: bold;
                 font-size: 30px;line-height: 37px;text-align: center;color: #000000;">
-                    ACROSS</p>
+                        GeezaKicks</p>
+                </div>
             </div>
         </div>
     </div>
@@ -54,11 +58,14 @@
                             Регистрация</p>
                         {{ signup_form.name(class="form-control", id="floatingName",type="name", placeholder="Имя",
                         style="position: relative;top:20px;") }}
-                        {{ signup_form.email(class="form-control", id="floatingEmail",type="email", placeholder="E-mail",
+                        {{ signup_form.email(class="form-control", id="floatingEmail",type="email",
+                        placeholder="E-mail",
                         style="position: relative;top:20px;") }}
-                        {{ signup_form.password(class="form-control", id="floatingPassword",type="password", placeholder="Пароль",
+                        {{ signup_form.password(class="form-control", id="floatingPassword",type="password",
+                        placeholder="Пароль",
                         style="position: relative;top:20px;") }}
-                        {{ signup_form.phone(class="form-control", id="floatingPhone",type="phone", placeholder="Телефон",
+                        {{ signup_form.phone(class="form-control", id="floatingPhone",type="phone",
+                        placeholder="Телефон",
                         style="position: relative;top:120px;") }}
                         <div style="position: relative;top:120px;">{{ message }}</div>
                         <div class="d-flex justify-content-center" style="position: relative;top:262px;height:60px">
@@ -103,6 +110,7 @@
         y.style.top = "300px";
         z.style.left = rect.left + "px";
     }
+
 
 
 

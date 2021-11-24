@@ -203,6 +203,15 @@ def item_page(item_id):
     return resp
 
 
+@app.route('/liked', methods=['GET', 'POST'])
+def liked_page():
+    search_form = SearchForm()
+    if search_form.validate_on_submit():
+        res = search_form.search.data
+        return redirect('/search/{}'.format(res))
+    return render_template('cart_page.html', length=0, search_form=search_form)
+
+
 def main():
     db_session.global_init("db/database.db")
     app.run()
