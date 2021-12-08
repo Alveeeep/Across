@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b579331d-1718-48a7-b6bf-8dbcef2e1ceb" name="Changes" comment="рабочая версия Дизайн доделан&#10;нужно:&#10;1.Добавить способ оплаты&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение&#10;!Дизайн авторизации не доделан, но она работает">
-      <change afterPath="$PROJECT_DIR$/data/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/items.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/items.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/news.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/news.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/users.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/db/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    <list default="true" id="b579331d-1718-48a7-b6bf-8dbcef2e1ceb" name="Changes" comment="переработан функционал с БД через flask-sqlalchemy&#10;нужно:&#10;1.Добавить способ оплаты и админку&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение&#10;!Дизайн авторизации не доделан, но она работает">
+      <change beforePath="$PROJECT_DIR$/data/__all_models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/db_session.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/items.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/news.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/users.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -312,7 +311,21 @@
       <option name="project" value="LOCAL" />
       <updated>1637775787058</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="переработан функционал с БД через flask-sqlalchemy&#10;нужно:&#10;1.Добавить способ оплаты и админку&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение&#10;!Дизайн авторизации не доделан, но она работает">
+      <created>1638986949420</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1638986949420</updated>
+    </task>
+    <task id="LOCAL-00027" summary="переработан функционал с БД через flask-sqlalchemy&#10;нужно:&#10;1.Добавить способ оплаты и админку&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение&#10;!Дизайн авторизации не доделан, но она работает">
+      <created>1638986964038</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1638986964038</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -347,6 +360,7 @@
     <MESSAGE value="рабочая версия Дизайн доделан&#10;нужно:&#10;1.Страница корзины выводит текст, если отсутствуют предметы&#10;2.Добавить способ оплаты&#10;3.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение и пока не имеет функционал&#10;!Функции &quot;Нравится&quot; пока нет (мб ее вообще стоит убрать?)&#10;!Дизайн авторизации не доделан, но она работает" />
     <MESSAGE value="рабочая версия Дизайн доделан&#10;нужно:&#10;1.Добавить способ оплаты&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение и пока не имеет функционал&#10;!Функции &quot;Нравится&quot; пока нет (мб ее вообще стоит убрать?)&#10;!Дизайн авторизации не доделан, но она работает" />
     <MESSAGE value="рабочая версия Дизайн доделан&#10;нужно:&#10;1.Добавить способ оплаты&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение&#10;!Дизайн авторизации не доделан, но она работает" />
-    <option name="LAST_COMMIT_MESSAGE" value="рабочая версия Дизайн доделан&#10;нужно:&#10;1.Добавить способ оплаты&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение&#10;!Дизайн авторизации не доделан, но она работает" />
+    <MESSAGE value="переработан функционал с БД через flask-sqlalchemy&#10;нужно:&#10;1.Добавить способ оплаты и админку&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение&#10;!Дизайн авторизации не доделан, но она работает" />
+    <option name="LAST_COMMIT_MESSAGE" value="переработан функционал с БД через flask-sqlalchemy&#10;нужно:&#10;1.Добавить способ оплаты и админку&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение&#10;!Дизайн авторизации не доделан, но она работает" />
   </component>
 </project>
