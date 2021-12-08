@@ -1,33 +1,35 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, make_response, jsonify
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
+from flask_sqlalchemy import SQLAlchemy, Model
 import unicodedata
-
 from flask_wtf import CsrfProtect, CSRFProtect
 from werkzeug.utils import redirect
-
-from data import db_session
-from flask import Flask, render_template, request, make_response, jsonify
 from forms.search import SearchForm
 from forms.login import LoginForm, RegisterForm
 from forms.buy import BuyForm
 from forms.cart import Cart
-from data.users import User
-from data.items import Item
-from data.news import New
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+from data.models import db
 import json
 import math
 
 app = Flask(__name__)
+app.app_context().push()
+db.init_app(app)
 CSRFProtect(app)
 app.config['SECRET_KEY'] = 'across_secret_key'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/database.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+from data.models import User, Item, New
 
 
 @login_manager.user_loader
 def load_user(user_id):
-    db_sess = db_session.create_session()
-    return db_sess.query(User).get(user_id)
+    return User.query.get(user_id)
 
 
 @app.route('/logout')
@@ -39,11 +41,11 @@ def logout():
 
 @app.route('/', methods=['POST', 'GET'])
 def main_page():
-    db_sess = db_session.create_session()
-    news = db_sess.query(New).all()
+    news = New.query.all()
     items = []
+    print(news)
     for el in news:
-        item = db_sess.query(Item).filter(Item.id == el.id).first()
+        item = Item.query.filter(Item.id == el.id).first()
         items.append(item)
     search_form = SearchForm()
     if search_form.validate_on_submit():
@@ -58,10 +60,9 @@ def search(title):
     if search_form.validate_on_submit():
         res = search_form.search.data
         return redirect('/search/{}'.format(res))
-    db_sess = db_session.create_session()
-    items = db_sess.query(Item).filter(Item.title.like('%{}%'.format(title))).all()
+    items = Item.query.filter(Item.title.like('%{}%'.format(title))).all()
     if len(items) == 0:
-        items = db_sess.query(Item).filter(Item.name.like('%{}%'.format(title))).all()
+        items = Item.query.filter(Item.name.like('%{}%'.format(title))).all()
     return render_template('shoes_page.html', items=items, length=len(items), title=title, search_form=search_form)
 
 
@@ -70,8 +71,7 @@ def login():
     form_login = LoginForm()
     form_signup = RegisterForm()
     if form_login.validate_on_submit():
-        db_sess = db_session.create_session()
-        user = db_sess.query(User).filter(User.email == form_login.email.data).first()
+        user = User.query.filter(User.email == form_login.email.data).first()
         if user and user.check_password(form_login.password.data):
             login_user(user)
             return redirect('/')
@@ -85,8 +85,7 @@ def register():
     form_login = LoginForm()
     form_signup = RegisterForm()
     if form_signup.validate_on_submit():
-        db_sess = db_session.create_session()
-        if db_sess.query(User).filter(User.email == form_signup.email.data).first():
+        if User.query.filter(User.email == form_signup.email.data).first():
             return render_template('login.html', signup_form=form_signup, login_form=form_login,
                                    message="Такой пользователь уже есть")
         user = User(
@@ -95,15 +94,14 @@ def register():
             phone=form_signup.phone.data
         )
         user.set_password(form_signup.password.data)
-        db_sess.add(user)
-        db_sess.commit()
+        db.session.add(user)
+        db.session.commit()
         return redirect('/login')
     return render_template('login.html', signup_form=form_signup, login_form=form_login)
 
 
 @app.route('/cart', methods=['GET', 'POST'])  # корзина переименовать потом
 def categories_page():
-    db_sess = db_session.create_session()
     form = BuyForm()
     cart = []
     sizes = []
@@ -115,7 +113,7 @@ def categories_page():
         return redirect('/search/{}'.format(res))
     if current_user.is_authenticated:
         id = current_user.get_id()
-        user = db_sess.query(User).filter(User.id == id).first()
+        user = User.query.filter(User.id == id).first()
         cart = user.cart
     else:
         cart = request.cookies.get('usercart')
@@ -125,7 +123,7 @@ def categories_page():
             el = el.split(':')
             id = int(el[0])
             sizes.append(int(el[1]))
-            item = db_sess.query(Item).filter(Item.id == id).first()
+            item = Item.query.filter(Item.id == id).first()
             items.append(item)
             total += int(item.price)
         return render_template('cart_page.html', items=items, total=total, length=len(items), form=form,
@@ -136,12 +134,11 @@ def categories_page():
 
 @app.route('/item_delete/<id>/<size>', methods=['GET', 'POST'])
 def delete_item(id, size):
-    db_sess = db_session.create_session()
     resp = make_response(redirect('/cart'))
     item_id = id
     if current_user.is_authenticated:
         id = current_user.get_id()
-        user = db_sess.query(User).filter(User.id == id).first()
+        user = User.query.filter(User.id == id).first()
         cart = user.cart
         cart = cart.split(', ')
         for el in cart:
@@ -152,7 +149,7 @@ def delete_item(id, size):
         return resp
     else:
         cart = request.cookies.get('usercart')
-        cart = cart.split(',')
+        cart = cart.split(', ')
         for el in cart:
             if el == '{}:{}'.format(item_id, size):
                 cart.remove(el)
@@ -163,8 +160,7 @@ def delete_item(id, size):
 
 @app.route('/categories/<title>', methods=['GET', 'POST'])
 def shoes_page(title):
-    db_sess = db_session.create_session()
-    items = db_sess.query(Item).filter(Item.category == title).all()
+    items = Item.query.filter(Item.category == title).all()
     search_form = SearchForm()
     if search_form.validate_on_submit():
         res = search_form.search.data
@@ -178,8 +174,7 @@ def shoes_page(title):
 @app.route('/items/<item_id>', methods=['GET', 'POST'])
 def item_page(item_id):
     form = Cart()
-    db_sess = db_session.create_session()
-    item = db_sess.query(Item).filter(Item.id == item_id).first()
+    item = Item.query.filter(Item.id == item_id).first()
     images = item.image.split(', ')
     sizes = item.size.split(', ')
     resp = make_response(
@@ -189,7 +184,7 @@ def item_page(item_id):
         size = form.size.data
         if current_user.is_authenticated:
             id = current_user.get_id()
-            user = db_sess.query(User).filter(User.id == id).first()
+            user = User.query.filter(User.id == id).first()
             cart = user.cart
             if len(cart) != 0:
                 cart += ', {}:{}'.format(item_id, size)
@@ -202,7 +197,7 @@ def item_page(item_id):
             cookie = request.cookies.get('usercart')
             if cookie is not None:
                 if '{}:{}'.format(item_id, size) not in cookie:
-                    cookie += ',{}:{}'.format(item_id, size)
+                    cookie += ', {}:{}'.format(item_id, size)
                     resp.set_cookie('usercart', cookie)
             else:
                 resp.set_cookie('usercart', '{}:{}'.format(item_id, size))
@@ -211,7 +206,6 @@ def item_page(item_id):
 
 
 def main():
-    db_session.global_init("db/database.db")
     app.run()
 
 
