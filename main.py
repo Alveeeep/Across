@@ -18,13 +18,21 @@ app = Flask(__name__)
 app.app_context().push()
 db.init_app(app)
 CSRFProtect(app)
+
 app.config['SECRET_KEY'] = 'across_secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/database.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+admin = Admin(app)
+
 from data.models import User, Item, New
+
+admin.add_view(ModelView(Item, db.session))
+admin.add_view(ModelView(User, db.session))
+admin.add_view(ModelView(New, db.session))
 
 
 @login_manager.user_loader
@@ -43,7 +51,6 @@ def logout():
 def main_page():
     news = New.query.all()
     items = []
-    print(news)
     for el in news:
         item = Item.query.filter(Item.id == el.id).first()
         items.append(item)
@@ -145,7 +152,7 @@ def delete_item(id, size):
             if el == '{}:{}'.format(item_id, size):
                 cart.remove(el)
         user.cart = ', '.join(cart)
-        db_sess.commit()
+        db.session.commit()
         return resp
     else:
         cart = request.cookies.get('usercart')
@@ -186,13 +193,13 @@ def item_page(item_id):
             id = current_user.get_id()
             user = User.query.filter(User.id == id).first()
             cart = user.cart
-            if len(cart) != 0:
+            if cart is not None:
                 cart += ', {}:{}'.format(item_id, size)
                 user.cart = cart
-                db_sess.commit()
+                db.session.commit()
             else:
                 user.cart = '{}:{}'.format(item_id, size)
-                db_sess.commit()
+                db.session.commit()
         else:
             cookie = request.cookies.get('usercart')
             if cookie is not None:

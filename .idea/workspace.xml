@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b579331d-1718-48a7-b6bf-8dbcef2e1ceb" name="Changes" comment="переработан функционал с БД через flask-sqlalchemy&#10;нужно:&#10;1.Добавить способ оплаты и админку&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение&#10;!Дизайн авторизации не доделан, но она работает">
-      <change beforePath="$PROJECT_DIR$/data/__all_models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/db_session.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/items.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/news.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/users.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/db/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/dfgdfgdf.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/jggj.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -325,7 +326,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638986964038</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="переработан функционал с БД через flask-sqlalchemy&#10;нужно:&#10;1.Добавить способ оплаты и админку&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение&#10;!Дизайн авторизации не доделан, но она работает">
+      <created>1638987005682</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1638987005682</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
