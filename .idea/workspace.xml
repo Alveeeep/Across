@@ -4,20 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b579331d-1718-48a7-b6bf-8dbcef2e1ceb" name="Changes" comment="переработан функционал с БД через flask-sqlalchemy&#10;нужно:&#10;1.Добавить способ оплаты и админку&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение&#10;!Дизайн авторизации не доделан, но она работает">
-      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/README" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/alembic.ini" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/env.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/script.py.mako" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/versions/008a62e19c80_initial_migration.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/versions/add6100c89e6_.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/versions/f117fca64aee_.py" afterDir="false" />
+    <list default="true" id="b579331d-1718-48a7-b6bf-8dbcef2e1ceb" name="Changes" comment="Админка готова&#10;нужно:&#10;Настроить New; отображение ролей в админке&#10;1.Добавить способ оплаты&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение&#10;!Дизайн авторизации не доделан, но она работает">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/db/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms/login.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +25,13 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -362,7 +360,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638987005682</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Админка готова&#10;нужно:&#10;Настроить New; отображение ролей в админке&#10;1.Добавить способ оплаты&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение&#10;!Дизайн авторизации не доделан, но она работает">
+      <created>1639406198800</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1639406198800</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -398,6 +403,7 @@
     <MESSAGE value="рабочая версия Дизайн доделан&#10;нужно:&#10;1.Добавить способ оплаты&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение и пока не имеет функционал&#10;!Функции &quot;Нравится&quot; пока нет (мб ее вообще стоит убрать?)&#10;!Дизайн авторизации не доделан, но она работает" />
     <MESSAGE value="рабочая версия Дизайн доделан&#10;нужно:&#10;1.Добавить способ оплаты&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение&#10;!Дизайн авторизации не доделан, но она работает" />
     <MESSAGE value="переработан функционал с БД через flask-sqlalchemy&#10;нужно:&#10;1.Добавить способ оплаты и админку&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение&#10;!Дизайн авторизации не доделан, но она работает" />
-    <option name="LAST_COMMIT_MESSAGE" value="переработан функционал с БД через flask-sqlalchemy&#10;нужно:&#10;1.Добавить способ оплаты и админку&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение&#10;!Дизайн авторизации не доделан, но она работает" />
+    <MESSAGE value="Админка готова&#10;нужно:&#10;Настроить New; отображение ролей в админке&#10;1.Добавить способ оплаты&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение&#10;!Дизайн авторизации не доделан, но она работает" />
+    <option name="LAST_COMMIT_MESSAGE" value="Админка готова&#10;нужно:&#10;Настроить New; отображение ролей в админке&#10;1.Добавить способ оплаты&#10;2.Компьютерную версию(позже)&#10;ВНИМАНИЕ:&#10;!Слайдер на главное странице просто украшение&#10;!Дизайн авторизации не доделан, но она работает" />
   </component>
 </project>

@@ -13,8 +13,6 @@ from forms.cart import Cart
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from data.models import db
 from flask_migrate import Migrate
-from flask_script import Manager
-from flask_security import SQLAlchemyUserDatastore, Security
 import json
 import math
 
@@ -29,17 +27,21 @@ db.init_app(app)
 CSRFProtect(app)
 
 migrate = Migrate(app, db)
-manager = Manager(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-from data.models import User, Item, New, Role
+from data.models import User, Item, New
 
 
 class AdminMixin:
     def is_accessible(self):
-        return current_user.has_role('admin')
+        if current_user.is_authenticated:
+            id = current_user.get_id()
+            user = User.query.filter(User.id == id).first()
+            if user.role == 'admin':
+                return True
+        return False
 
     def inaccessible_callback(self, name, **kwargs):
         return redirect('/')
@@ -57,9 +59,6 @@ admin = Admin(app, 'GeezaKicks', url='/', index_view=HomeAdminView(name='Home'))
 admin.add_view(AdminView(Item, db.session))
 admin.add_view(AdminView(User, db.session))
 admin.add_view(AdminView(New, db.session))
-
-user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security(app, user_datastore)
 
 
 @login_manager.user_loader
