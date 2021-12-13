@@ -1,38 +1,65 @@
 from flask import Flask, render_template, request, make_response, jsonify
-from flask_admin import Admin
+from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
 from flask_sqlalchemy import SQLAlchemy, Model
 import unicodedata
 from flask_wtf import CsrfProtect, CSRFProtect
 from werkzeug.utils import redirect
+from werkzeug.security import generate_password_hash
 from forms.search import SearchForm
 from forms.login import LoginForm, RegisterForm
 from forms.buy import BuyForm
 from forms.cart import Cart
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from data.models import db
+from flask_migrate import Migrate
+from flask_script import Manager
+from flask_security import SQLAlchemyUserDatastore, Security
 import json
 import math
 
 app = Flask(__name__)
-app.app_context().push()
-db.init_app(app)
-CSRFProtect(app)
 
 app.config['SECRET_KEY'] = 'across_secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
+app.app_context().push()
+db.init_app(app)
+CSRFProtect(app)
+
+migrate = Migrate(app, db)
+manager = Manager(app)
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-admin = Admin(app)
+from data.models import User, Item, New, Role
 
-from data.models import User, Item, New
 
-admin.add_view(ModelView(Item, db.session))
-admin.add_view(ModelView(User, db.session))
-admin.add_view(ModelView(New, db.session))
+class AdminMixin:
+    def is_accessible(self):
+        return current_user.has_role('admin')
+
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect('/')
+
+
+class AdminView(AdminMixin, ModelView):
+    pass
+
+
+class HomeAdminView(AdminMixin, AdminIndexView):
+    pass
+
+
+admin = Admin(app, 'GeezaKicks', url='/', index_view=HomeAdminView(name='Home'))
+admin.add_view(AdminView(Item, db.session))
+admin.add_view(AdminView(User, db.session))
+admin.add_view(AdminView(New, db.session))
+
+user_datastore = SQLAlchemyUserDatastore(db, User, Role)
+security = Security(app, user_datastore)
 
 
 @login_manager.user_loader
