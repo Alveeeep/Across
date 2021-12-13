@@ -204,6 +204,20 @@ def shoes_page(title):
     return render_template('shoes_page.html', items=items, length=len(items), title=c, search_form=search_form)
 
 
+@app.route('/news', methods=['GET', 'POST'])
+def news_page():
+    search_form = SearchForm()
+    if search_form.validate_on_submit():
+        res = search_form.search.data
+        return redirect('/search/{}'.format(res))
+    news = New.query.all()
+    items = []
+    for el in news:
+        item = Item.query.filter(Item.id == el.item_id).first()
+        items.append(item)
+    return render_template('shoes_page.html', items=items, length=len(items), title='Новинки', search_form=search_form)
+
+
 @app.route('/items/<item_id>', methods=['GET', 'POST'])
 def item_page(item_id):
     form = Cart()
